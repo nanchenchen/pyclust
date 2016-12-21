@@ -4,10 +4,13 @@ import scipy.spatial
 def _kmeans_init(X, n_clusters, method='balanced'):
     """ Initialize k=n_clusters centroids randomly
     """
-    n_samples = X.shape[0]
-    cent_idx = np.random.choice(n_samples, replace=False, size=n_clusters)
+    # ensure rows are unique so that it won't sample two points in the same location
+    unique_X = np.vstack({tuple(row) for row in X})
+    n_samples = unique_X.shape[0]
     
-    centers = X[cent_idx,:]
+    cent_idx = np.random.choice(n_samples, replace=False, size=n_clusters)    
+    
+    centers = unique_X[cent_idx,:]    
     mean_X = np.mean(X, axis=0)
     
     if method == 'balanced':
