@@ -30,12 +30,19 @@ conda update --yes conda
 if [[ "$LATEST" == "true" ]]; then
     conda create -n testenv --yes python=$PYTHON_VERSION pip nose \
         numpy scipy scikit-learn cython pandas matplotlib
+elif [[ "$NUMPY_VERSION" == "1.9.*" ]]; then	
+ # for numpy<=1.9
+    conda create -n testenv --yes python=$PYTHON_VERSION pip nose \
+        numpy=$NUMPY_VERSION scipy=$SCIPY_VERSION \
+        scikit-learn=$SKLEARN_VERSION \
+	    pandas=$PANDAS_VERSION \
+		matplotlib=$MATPLOTLIB_VERSION cython libgfortran=1
 else
     conda create -n testenv --yes python=$PYTHON_VERSION pip nose \
         numpy=$NUMPY_VERSION scipy=$SCIPY_VERSION \
         scikit-learn=$SKLEARN_VERSION \
 	    pandas=$PANDAS_VERSION \
-		matplotlib=$MATPLOTLIB_VERSION cython libgfortran3
+		matplotlib=$MATPLOTLIB_VERSION cython libgfortran
 fi
 
 source activate testenv
