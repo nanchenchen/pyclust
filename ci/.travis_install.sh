@@ -42,7 +42,7 @@ else
         numpy=$NUMPY_VERSION scipy=$SCIPY_VERSION \
         scikit-learn=$SKLEARN_VERSION \
 	    pandas=$PANDAS_VERSION \
-		matplotlib=$MATPLOTLIB_VERSION cython libgfortran
+		matplotlib=$MATPLOTLIB_VERSION cython libgfortran=1
 fi
 
 source activate testenv
